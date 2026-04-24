@@ -57,11 +57,15 @@ function moveSnake() {
       newHead.col < 0 ||
       newHead.row >= ROWS ||
       newHead.row < 0 ||
-      snake.some((bodyPart) => bodyPart.row === newHead.row && bodyPart.col === newHead.col)
+      snake.some(
+        (bodyPart) =>
+          bodyPart.row === newHead.row && bodyPart.col === newHead.col,
+      )
     ) {
       clearInterval(movingSnake);
       play_again.style.display = "flex";
-      highest_score = current_Score > highest_score ? current_Score : highest_score;
+      highest_score =
+        current_Score > highest_score ? current_Score : highest_score;
       highest.textContent = `Highest score : ${highest_score}`; // FIXED: was highest_Score
       return;
     }
@@ -70,25 +74,33 @@ function moveSnake() {
 
     if (foodEaten === false) {
       let tail = snake[snake.length - 1];
-      document.querySelector(`#cell-${tail.col}-${tail.row}`).classList.remove("snake");
+      document
+        .querySelector(`#cell-${tail.col}-${tail.row}`)
+        .classList.remove("snake");
       snake.pop();
     }
     foodEaten = false;
 
-    document.querySelector(`#cell-${snake[0].col}-${snake[0].row}`).classList.add("snake");
+    document
+      .querySelector(`#cell-${snake[0].col}-${snake[0].row}`)
+      .classList.add("snake");
     eatAndGrow();
   }, 80);
 
   function generateFood() {
     colCellFood = Math.floor(Math.random() * COLS);
     rowCellFood = Math.floor(Math.random() * ROWS);
-    document.querySelector(`#cell-${colCellFood}-${rowCellFood}`).classList.add("food");
+    document
+      .querySelector(`#cell-${colCellFood}-${rowCellFood}`)
+      .classList.add("food");
   }
 
   function eatAndGrow() {
     if (snake[0].col === colCellFood && snake[0].row === rowCellFood) {
       foodEaten = true;
-      document.querySelector(`#cell-${colCellFood}-${rowCellFood}`).classList.remove("food");
+      document
+        .querySelector(`#cell-${colCellFood}-${rowCellFood}`)
+        .classList.remove("food");
       generateFood();
       current_Score += 10;
       length_of_your_snake += 1;
@@ -103,8 +115,19 @@ function moveSnake() {
 moveSnake();
 
 document.querySelector(".play").addEventListener("click", () => {
-  document.querySelectorAll(".snake").forEach((cell) => cell.classList.remove("snake"));
-  document.querySelectorAll(".food").forEach((cell) => cell.classList.remove("food"));
+  document
+    .querySelectorAll(".snake")
+    .forEach((cell) => cell.classList.remove("snake"));
+  document
+    .querySelectorAll(".food")
+    .forEach((cell) => cell.classList.remove("food"));
   play_again.style.display = "none";
   moveSnake();
+});
+
+let startX = 0;
+let startY = 0;
+
+document.addEventListener("touchstart", (e) => {
+  console.log(e);
 });
