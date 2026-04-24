@@ -13,10 +13,18 @@ var lengthOfSnake = document.querySelector("#lengthOfSnake");
 // MOVED outside moveSnake so it doesn't stack up on every play
 let directionOfSnake = { col: 0, row: 1 };
 document.addEventListener("keydown", (e) => {
-  if (e.code === "ArrowDown") directionOfSnake = { col: 0, row: 1 };
-  if (e.code === "ArrowUp") directionOfSnake = { col: 0, row: -1 };
-  if (e.code === "ArrowLeft") directionOfSnake = { col: -1, row: 0 };
-  if (e.code === "ArrowRight") directionOfSnake = { col: 1, row: 0 };
+  if (e.code === "ArrowDown" && directionOfSnake.row !== -1) {
+    directionOfSnake = { col: 0, row: 1 };
+  }
+  if (e.code === "ArrowUp" && directionOfSnake.row !== -1) {
+    directionOfSnake = { col: 0, row: -1 };
+  }
+  if (e.code === "ArrowLeft" && directionOfSnake.col !== 1) {
+    directionOfSnake = { col: -1, row: 0 };
+  }
+  if (e.code === "ArrowRight" && directionOfSnake.col !== -1) {
+    directionOfSnake = { col: 1, row: 0 };
+  }
 });
 
 for (let col = 0; col < COLS; col++) {
