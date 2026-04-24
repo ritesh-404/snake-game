@@ -99,7 +99,7 @@ function moveSnake() {
         .querySelector(`#cell-${snake[0].col}-${snake[0].row}`)
         .classList.add("snake");
       eatAndGrow();
-    }, 80);
+    }, 250);
   }
 
   function generateFood() {
