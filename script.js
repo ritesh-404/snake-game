@@ -1,6 +1,13 @@
 const canva = document.querySelector(".game-canvas");
+
+function getGridSize() {
+  if (window.innerWidth <= 768) return 30;
+  return 21;
+}
+
 const COLS = 31;
-const ROWS = 21;
+const ROWS = getGridSize();
+
 var current_Score = 0;
 var highest_score = 0;
 var length_of_your_snake = 0;
