@@ -19,7 +19,7 @@ document.addEventListener("keydown", (e) => {
   if (e.code === "ArrowDown" && directionOfSnake.row !== -1) {
     directionOfSnake = { col: 0, row: 1 };
   }
-  if (e.code === "ArrowUp" && directionOfSnake.row !== -1) {
+  if (e.code === "ArrowUp" && directionOfSnake.row !== 1) {
     directionOfSnake = { col: 0, row: -1 };
   }
   if (e.code === "ArrowLeft" && directionOfSnake.col !== 1) {
