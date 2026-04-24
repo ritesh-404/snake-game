@@ -1,0 +1,166 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------------- BODY (desktop background) ---------------- */
+body {
+  background: #3a6ea5; /* XP blue */
+  font-family: Tahoma, Verdana, sans-serif;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  height: 100vh;
+  padding-top: 60px;
+  gap: 10px;
+}
+
+/* ---------------- FAKE WINDOW ---------------- */
+.game-stats,
+.game-canvas {
+  width: 775px;
+}
+
+/* wrap illusion using both blocks */
+.game-stats {
+  background: #ece9d8;
+
+  border: 2px solid #fff;
+  border-bottom: none;
+
+  box-shadow:
+    inset -2px -2px #808080,
+    inset 2px 2px #ffffff;
+
+  padding: 6px 8px;
+
+  font-size: 12px;
+  color: black;
+
+  display: flex;
+  justify-content: space-between;
+
+  position: relative;
+}
+
+/* 🔷 fake title bar */
+.game-stats::before {
+  content: "Snake Game";
+  position: absolute;
+  top: -36px;
+  left: -2px;
+
+  width: calc(97% + 4px);
+
+  background: linear-gradient(to right, #0a246a, #3a6ea5);
+  color: white;
+
+  padding: 6px 10px;
+  font-weight: bold;
+  font-size: 13px;
+
+  border: 2px solid #fff;
+  box-shadow:
+    inset -2px -2px #808080,
+    inset 2px 2px #ffffff;
+}
+
+/* ---------------- CANVAS ---------------- */
+.game-canvas {
+  display: flex;
+  height: 525px;
+
+  background: #ffffff;
+
+  border: 2px solid #fff;
+  border-top: none;
+
+  box-shadow:
+    inset -2px -2px #808080,
+    inset 2px 2px #ffffff;
+}
+
+/* pixels */
+.pixel {
+  width: 25px;
+  height: 25px;
+  background-color: #ffffff;
+}
+
+/* snake */
+.snake {
+  background-color: #000080; /* XP blue */
+}
+
+/* food */
+.food {
+  background-color: #ff0000;
+}
+
+/* ---------------- GAME OVER WINDOW ---------------- */
+.play-again {
+  width: 260px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  display: none;
+  flex-direction: column;
+  gap: 10px;
+
+  background: #ece9d8;
+
+  border: 2px solid #fff;
+
+  box-shadow:
+    inset -2px -2px #808080,
+    inset 2px 2px #ffffff;
+
+  padding: 10px;
+
+  font-size: 12px;
+  color: black;
+}
+
+/* fake popup title bar */
+.play-again::before {
+  content: "Snake.exe";
+  display: block;
+
+  background: linear-gradient(to right, #0a246a, #3a6ea5);
+  color: white;
+
+  padding: 5px;
+  margin-bottom: 8px;
+
+  font-weight: bold;
+}
+
+/* button */
+.play {
+  font-family: Tahoma, sans-serif;
+  font-size: 12px;
+
+  padding: 5px 10px;
+
+  background: #d4d0c8;
+  border: 2px solid #fff;
+
+  box-shadow:
+    inset -2px -2px #808080,
+    inset 2px 2px #ffffff;
+
+  cursor: pointer;
+}
+
+.play:active {
+  box-shadow:
+    inset 2px 2px #808080,
+    inset -2px -2px #ffffff;
+}
