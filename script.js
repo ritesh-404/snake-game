@@ -13,6 +13,12 @@ var startTheGame = document.querySelector(".start-the-game");
 const bgAudio = new Audio("bgMusic.mp3");
 const gameOverAudio = new Audio("gameOverMusic.mp3");
 
+// control buttons
+const moveUp = document.querySelector(".moveUp");
+const moveDown = document.querySelector(".moveDown");
+const moveLeft = document.querySelector(".moveLeft");
+const moveRight = document.querySelector(".moveRight");
+
 // MOVED outside moveSnake so it doesn't stack up on every play
 let directionOfSnake = { col: 0, row: 1 };
 document.addEventListener("keydown", (e) => {
@@ -26,6 +32,27 @@ document.addEventListener("keydown", (e) => {
     directionOfSnake = { col: -1, row: 0 };
   }
   if (e.code === "ArrowRight" && directionOfSnake.col !== -1) {
+    directionOfSnake = { col: 1, row: 0 };
+  }
+});
+
+moveDown.addEventListener("click", () => {
+  if (directionOfSnake.row !== -1) {
+    directionOfSnake = { col: 0, row: 1 };
+  }
+});
+moveUp.addEventListener("click", () => {
+  if (directionOfSnake.row !== 1) {
+    directionOfSnake = { col: 0, row: -1 };
+  }
+});
+moveLeft.addEventListener("click", () => {
+  if (directionOfSnake.col !== 1) {
+    directionOfSnake = { col: -1, row: 0 };
+  }
+});
+moveRight.addEventListener("click", () => {
+  if (directionOfSnake.col !== -1) {
     directionOfSnake = { col: 1, row: 0 };
   }
 });
