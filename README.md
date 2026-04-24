@@ -4,7 +4,7 @@ A simple Snake game built using HTML, CSS, and JavaScript.
 
 ## 🎮 Play the Game
 
-👉 https://your-username.github.io/snake-game/
+👉 https://ritesh-404.github.io/snake-game/
 
 ## 🚀 Features
 
