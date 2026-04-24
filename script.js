@@ -1,7 +1,7 @@
 const canva = document.querySelector(".game-canvas");
 
 function getGridSize() {
-  if (window.innerWidth <= 768) return 30;
+  if (window.innerWidth <= 768) return 60;
   return 21;
 }
 
