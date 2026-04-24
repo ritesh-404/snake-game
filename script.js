@@ -1,12 +1,17 @@
 const canva = document.querySelector(".game-canvas");
 
 function getGridSize() {
-  if (window.innerWidth <= 768) return 60;
+  if (window.innerWidth <= 768) return 70;
   return 21;
 }
 
 const COLS = 31;
 const ROWS = getGridSize();
+
+window.addEventListener("resize", () => {
+  ROWS = getGridSize();
+  // re-render or reset game if needed
+});
 
 var current_Score = 0;
 var highest_score = 0;
