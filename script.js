@@ -9,6 +9,9 @@ var highest = document.querySelector("#highest");
 var current = document.querySelector("#current");
 var play_again = document.querySelector(".play-again");
 var lengthOfSnake = document.querySelector("#lengthOfSnake");
+var startTheGame = document.querySelector(".start-the-game");
+const bgAudio = new Audio("bgMusic.mp3");
+const gameOverAudio = new Audio("gameOverMusic.mp3");
 
 // MOVED outside moveSnake so it doesn't stack up on every play
 let directionOfSnake = { col: 0, row: 1 };
@@ -53,47 +56,51 @@ function moveSnake() {
   directionOfSnake = { col: 0, row: 1 }; // reset direction too
   let snake = [{ col: 1, row: 1 }];
 
-  const movingSnake = setInterval(() => {
-    let newHead = {
-      col: snake[0].col + directionOfSnake.col,
-      row: snake[0].row + directionOfSnake.row,
-    };
+  function moveTheSnake() {
+    const movingSnake = setInterval(() => {
+      let newHead = {
+        col: snake[0].col + directionOfSnake.col,
+        row: snake[0].row + directionOfSnake.row,
+      };
 
-    // FIXED: check collision BEFORE unshifting so head isn't in array yet
-    if (
-      newHead.col >= COLS ||
-      newHead.col < 0 ||
-      newHead.row >= ROWS ||
-      newHead.row < 0 ||
-      snake.some(
-        (bodyPart) =>
-          bodyPart.row === newHead.row && bodyPart.col === newHead.col,
-      )
-    ) {
-      clearInterval(movingSnake);
-      play_again.style.display = "flex";
-      highest_score =
-        current_Score > highest_score ? current_Score : highest_score;
-      highest.textContent = `Highest score : ${highest_score}`; // FIXED: was highest_Score
-      return;
-    }
+      // FIXED: check collision BEFORE unshifting so head isn't in array yet
+      if (
+        newHead.col >= COLS ||
+        newHead.col < 0 ||
+        newHead.row >= ROWS ||
+        newHead.row < 0 ||
+        snake.some(
+          (bodyPart) =>
+            bodyPart.row === newHead.row && bodyPart.col === newHead.col,
+        )
+      ) {
+        clearInterval(movingSnake);
+        bgAudio.pause();
+        gameOverAudio.play();
+        play_again.style.display = "flex";
+        highest_score =
+          current_Score > highest_score ? current_Score : highest_score;
+        highest.textContent = `Highest score : ${highest_score}`; // FIXED: was highest_Score
+        return;
+      }
 
-    snake.unshift(newHead); // add head after collision check
+      snake.unshift(newHead); // add head after collision check
 
-    if (foodEaten === false) {
-      let tail = snake[snake.length - 1];
+      if (foodEaten === false) {
+        let tail = snake[snake.length - 1];
+        document
+          .querySelector(`#cell-${tail.col}-${tail.row}`)
+          .classList.remove("snake");
+        snake.pop();
+      }
+      foodEaten = false;
+
       document
-        .querySelector(`#cell-${tail.col}-${tail.row}`)
-        .classList.remove("snake");
-      snake.pop();
-    }
-    foodEaten = false;
-
-    document
-      .querySelector(`#cell-${snake[0].col}-${snake[0].row}`)
-      .classList.add("snake");
-    eatAndGrow();
-  }, 80);
+        .querySelector(`#cell-${snake[0].col}-${snake[0].row}`)
+        .classList.add("snake");
+      eatAndGrow();
+    }, 80);
+  }
 
   function generateFood() {
     colCellFood = Math.floor(Math.random() * COLS);
@@ -117,10 +124,15 @@ function moveSnake() {
     }
   }
 
+  moveTheSnake();
   generateFood();
 }
 
-moveSnake();
+startTheGame.addEventListener("click", () => {
+  startTheGame.style.display = "none";
+  bgAudio.play();
+  moveSnake();
+});
 
 document.querySelector(".play").addEventListener("click", () => {
   document
@@ -130,12 +142,11 @@ document.querySelector(".play").addEventListener("click", () => {
     .querySelectorAll(".food")
     .forEach((cell) => cell.classList.remove("food"));
   play_again.style.display = "none";
+
+  bgAudio.play();
+
   moveSnake();
 });
 
-let startX = 0;
-let startY = 0;
-
-document.addEventListener("touchstart", (e) => {
-  console.log(e);
-});
+// let startX = 0;
+// let startY = 0;
