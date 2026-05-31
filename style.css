@@ -17,6 +17,7 @@ body {
   height: 100vh;
   padding-top: 60px;
   gap: 10px;
+  overflow: hidden;
 }
 
 /* ---------------- FAKE WINDOW ---------------- */
@@ -175,6 +176,13 @@ body {
   gap: 7px;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  top: 10rem;
+  right: 10rem;
+}
+
+.start-the-game{
+  padding: 10px 40px;
 }
 
 .control-btn {
